@@ -53,4 +53,60 @@ print([[x,y] for x in ['a', 'b', 'c'] for y in [1,2,3]])
 lofl = [[.25, .75, .1], [-1, 0], [4,4,4,4]]
 #print(sum([sum([x],[]) for x in lofl]), [])  almost working, syntax issue
 
-#
+#0.5.13 find out what happens when the left side doesn't have the same || as the right side
+#[x,y,z] = [1,2,3,4] "too many values to unpack error"
+
+#0.5.14-.15-.16 write a triple comprehension such whose value is a list of 3 integer tuples that add to 0
+#and that does not include (0,0,0)
+S = {-4, -2, 1, 2, 5, 0}
+print([(i,j,k) for i in S for j in S for k in S if i+j+k == 0 and (i, j, k) != (0, 0, 0)][0])
+
+#0.5.17 find an example of a list and set with same input values but different ||
+print(len(set([1,2,2]))!=len([1,2,2]))
+
+#0.5.18 write a comprehension whose value is the set of odd numbers from 1, 99
+print([i for i in range(1,100,2)])
+
+#0.5.19 write a that combines two lists using zip and range
+L = ['a', 'b', 'c', 'd']
+print(list(zip(range(5),L)))
+
+#0.5.20 write a comprehension that sums the [nth] element of two lists
+print([x+y for (x,y) in zip ([10,25,40], [1,15,20])])
+
+#0.5.21 write a comprehension that pulls out all the values from a list of dicts that all contain that value
+dlist = [{'james': 'sean', 'director': 'terence'}, {'j':'rogers', 'director':'lewis'}, {'james':'pierce', 'director':'lewis'}, {'james': 'pierce', 'director':'roger'}]
+k = 'james'
+print([ i[k] for i in dlist if k in i]) #can filter but it doesn't like the else
+
+#0.5.23 write a dict with range where the value is squared
+print({k:k**2 for k in range(100)})
+
+#0.5.24 write a comprehension whose value is the identity frunction for some set
+d = {1,2,3,4,5}
+print({i:i for i in d})
+
+#0.5.25 write a comprehension such that given base x and integers set(range(base)) you create a
+#dict in the form 1: {0,0,1}, 2:{0,0,2}
+base = 10
+ints = set(range(base))
+#print({i:g for i in ran for g in ints }) can't figure out how to do this one, moving on
+
+#0.5.26 map names of employees to their salaries.  name[i] == i: salaries
+id2salary = {0:1000.0, 3:990, 1:1200.50}
+names = ['larry', 'curly', '', 'moe']
+print({names[i]:j for (i,j) in id2salary.items()})
+
+#0.5.28 function that outputs a list where the ith element == ith element input -1
+def plus_one(list): return [i+1 for i in list]
+print(plus_one([1,2,3]))
+
+#0.5.29 write a procedure dict2list which takes in a dict and keys and spits out proper values
+def dict2list(dict, keys): return [ dict[k] for k in keys]
+print(dict2list({'a':'A', 'b':'B', 'c':'C'},['b', 'a', 'c']) )
+
+#0.5.30 take a value list and a key list and make a dict
+def makedict(list, keys): return {l:k for (k,l) in zip (keys, list)}
+print (makedict(['a', 'b', 'c'], ['A', 'B', 'C']))
+
+#0.5.31 requires base 10--> 2 conversion.  leaving till I figure out 5.25
