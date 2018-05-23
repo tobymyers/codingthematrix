@@ -135,15 +135,18 @@ def makeInverseIndex(strlist):
 
 strlist = open('stories_small.txt')
 index = makeInverseIndex(strlist)
-print(index)
+# print(index)
+
 #0.6.7
 def orSearch(inverse_index, query):
-    return {inverse_index[i] for q in query for i in inverse_index if q in inverse_index}
-
-    #not sure if this is working 
-print(orSearch(index, 'however'))
+    return [inverse_index[i] for q in query.split() for i in inverse_index if q == i]
+#print(orSearch(index, 'Hello, I am'))
 
 #0.6.8
-# def andSearch(inverseIndex, query):
-#     relevant_words = orSearch(inverseIndex, query):
-#     return [relevant_words[i] for i in range(len(relevant_words)-1) if relevant_words[i] & relevant_words[i+1]
+def andSearch(inverseIndex, query):
+     relevant_lines = orSearch(inverseIndex, query)
+     starter = set(range(1000))
+     for i in relevant_lines:
+         starter.intersection_update(i)
+     return starter
+print(andSearch(index, 'a the if though'))
