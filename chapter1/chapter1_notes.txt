@@ -1,0 +1,53 @@
+i = square root of negative 1
+this exists to solve the problem of not being able to find an answer for anything**2 being equal
+to a negative number. in math, x**2 = -1 has no solution without i, which in python is written 1j.
+
+here are a few importance we can know about j:
+if j = sqrt(-1):
+    j**2 = -1
+    3*j**2 = -3
+
+in general, the solution to x**2 = -x for positive numbers is sqrt(x)* 1j
+complex numbers are ones that have an imaginary num and a real num in them: an example would be:
+3+2j
+
+the way to get rid of 1j is to square it, since then you get back into real nums.
+
+my guess for 1j ** range(10):
+0 = 1
+1 = 1j
+2 = -1
+3 = -1j
+4 = 1
+5 = 1j
+6 = -1
+7 = -1j
+8 = 1
+9 = 1j
+actual results: (1+0j)
+1j
+(-1+0j)
+(-0-1j)
+(1+0j)
+1j
+(-1+0j)
+(-0-1j)
+(1+0j)
+1j
+I was right, except for I forgot that x**0 = 1
+PATTERN: for 1j**n, for n > 1, (n-4)//4 = 1, then 1j...(n-4)//4 = 2, then -1....(n-4)//4 = 3, then -1j....(n-4)//4 ==0, 1
+added the -4 b/c otherwise it doesn't work for 1, 2, and 3
+
+complex nums are really useful for image transformations b/c adding and subtracting them is v easy and you can get both
+x abd y in a single number.  for example, if x is the real nums, and y is the imaginary nums,
+you can move something up by 1 and over by two just by saying f(z) = z + oldz.  if old z is 3+4j, and z is
+-3-4j, new z moves to the origin.
+
+It's nice to think of the transforming as an arrow with a direction, so a vector.  this is true b/c it
+is moving the point z, which is made up of the real and imaginary parts of the number, to
+a new location.
+
+the cool thing is that translations can be added.  if f and g are both translations, f o g (z) is the z1 +z2 +z
+
+
+multilying scales it, multiplying by negative flips 180 degrees
