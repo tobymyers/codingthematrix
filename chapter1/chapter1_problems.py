@@ -14,3 +14,29 @@ f = {'a':1, 'b':2}
 g = {1: 'one', 2: 'two'}
 def my_function_composition(f, g): return {k:g[v] for (k, v) in f.items()}
 print(my_function_composition(f, g))
+
+#1.7.3 sum a list
+def summer(l):
+    current = 0
+    for i in l:
+        current = current + i
+    return current
+#1.7.4
+def product(l):
+    current = 0
+    for i in l:
+        current = current * i
+    return current
+#1.7.5
+def my_min(l):
+    current = ''
+    for i in l:
+        if i < current:
+            current = i
+    return current
+#1.7.7
+def my_concat(l):
+    current = ''
+    for i in l:
+        current = current + i
+    return current
