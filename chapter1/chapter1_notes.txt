@@ -51,3 +51,6 @@ the cool thing is that translations can be added.  if f and g are both translati
 
 
 multilying scales it, multiplying by negative flips 180 degrees
+
+tuples can go in sets.  you can't tuple() an int, but you can tuple a set or a list
+a good way to dedupe is to make a bunch of tuples and put them in a set.  you'll get all unique tuples
