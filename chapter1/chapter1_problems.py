@@ -6,7 +6,6 @@ print(myfilter(L, num))
 
 #1.7.2 my_lists(l) for input [1,2,3], return [1], [1,2], [1,2,3]
 #def my_lists(l): return [j for i in l for j in range(i)]
-#print(my_lists(L)) #not right.  not returning list of lists, and incorrect for when passed 0
 def my_lists(l): return [list(range(i)) for i in l]
 print(my_lists(L))#fixed it!!
 #1.7.3 my_function_composition(f,g): spit out g of f where g o f exists
@@ -40,3 +39,30 @@ def my_concat(l):
     for i in l:
         current = current + i
     return current
+
+#1.7.8
+def my_union(listofsets):
+    current = listofsets[1]
+    for set in listofsets:
+        current = current | set
+    return current
+print(my_union([{1},{2,1}, {5,4}]))
+
+#1.7.9
+#1 empty set
+#2 empty set
+#3 empty set
+#4 empty string
+#5 empty set
+#5b you end up with union and intersection being the exact same things
+
+#1..7.10
+#a (5+3j)
+#b (1j)
+#c (-1 + 0.001j)
+#d (0.001 + 9j)
+
+#1.7.11
+#a e**3j
+#b e**(11pi/12)i
+c# still working here 

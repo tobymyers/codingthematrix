@@ -24,24 +24,32 @@ def possk():
         s.add(a)
 
     return s
-print(possk())
-
 def map():
     l = {z:list(format(i,'05b')) for (i, z) in zip(list(range(26)), list(string.ascii_lowercase))}
-
-print(map())
-
+    return l
+def map2():
+    l = {format(i,'05b'):z for (i, z) in zip(list(range(26)), list(string.ascii_lowercase))}
+    return l
 def gf2add(a, b):
     if a + b == 2:
         return 0
     else:
         return a + b
-
 def solve(map, possk, cypher):
-    for i in possk: #ll possible keys
+    ans = ''
+    for key in possk: #ll possible keys
         for c in cypher:
-            if
-                 for j,h in map.items(): #every character in map
-            #combine each character of key with character of cypher using gf2
-            #return result of mapping that against mapself.
-            #do this for each of the 32 potential keys
+            chr = ''
+            for k,a in zip(key, c):
+                chr = chr + str(gf2add(k,a))
+            if chr in map2:
+                ans = ans + map2[chr]
+            else:
+                ans = ans + '?'
+        ans = ans + '     '
+    return ans
+
+cypher = ((1,0,1,0,1),(0,0,1,0,0),(1,0,1,0,1),(0,1,0,1,1),(1,1,0,0,1),(0,0,0,1,1),(0,1,0,1,1),(1,0,1,0,1),(0,0,1,0,0),(1,1,0,0,1),(1,1,0,1,0))
+possk = possk()
+map2 = map2()
+print(solve(map2, possk, cypher))
