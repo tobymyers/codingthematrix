@@ -1,0 +1,30 @@
+scalar vector multiplcation is distributive.  this means 2[3,4] = [2*3, 2*4]
+addition is just like addition  in the complex plane.
+need a good analogy for vectors.  I know one definition is a force and a distance.  if they are functions,
+then they are not the input or the output, but rather the function itself.  given any input or output, here is what
+would happen. another good one could be as a carrier.  give it something and it will carry it somewhere
+
+scalars distribute like this: (A+B)u = Au + Bu this makes sese and if you give it any real numbers
+it works.  These two are EQUAL.  Same way of saying the exact same thing, and useful for solving problems as well,
+in the situation where A or B is unknown.  if both are known, just add them.
+
+turns out the work i did yesterday was correct, but, i could have done it more simply, by just subtracting the closer
+vector from the farther one.  this is the slope of the line, (over how many, up how many), and also
+gives the length of the line from the origin, so then we just have to translate it back up by the
+original amount we subtracted after applying the scalar from 0 to 1 to our new translated vector.
+
+A couple things to remember: a) I am NOT being tested on this.  I can learn at my own pace and dive deep.
+I have all the time in the world to focus, understand, and learn in a mode of curioisty and process rather
+than production.  Like learning Spanish, it will start to sink in and I'll get better at the
+language.  Rn i struggle to speak and understand, but it's getting easier.
+
+He's a sneaky sneaky, adding assumed 1s for scalars.  this allows us to get a line segment that
+specifies both endpoints, where Au + Bv where a,b <= 1 and a+b = 1 this is called a convex combination.  How to get there is on page
+78 and it's pretty cool, requiring some algebra.  Algebra is a bit like untying a knot.
+
+Affine combination is a convex combination where alpha and beta can be outside the range 0, 1 but still add up to 1
+This makes an infinite line segment.
+
+What we're doing here with line segments using convex/affine combinations is drawing a series of vectors of different
+lengths between the two end points, and the convex combination relationship of alha + beta == 1 allows us to "average" the two vectors.
+  
