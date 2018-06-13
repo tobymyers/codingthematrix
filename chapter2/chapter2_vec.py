@@ -15,6 +15,9 @@ class Vec:
     def get_item(self, label): return self.f[label] if label in self.f else None
 
     def scalar_mul(self, scalar):
+        """this one is a bit weird b/c it creates a new Vec with a new function"""
         new_f = {k:scalar * v for k,v in self.f.items() if v != 0}
         print(new_f)
         return Vec(self.D, new_f)
+
+     

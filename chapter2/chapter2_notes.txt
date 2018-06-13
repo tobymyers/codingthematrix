@@ -27,4 +27,16 @@ This makes an infinite line segment.
 
 What we're doing here with line segments using convex/affine combinations is drawing a series of vectors of different
 lengths between the two end points, and the convex combination relationship of alha + beta == 1 allows us to "average" the two vectors.
-  
+
+VIm notes:  /puts you in find mode which is amazing.  n moves you forward and N back, or if you type ? instead of
+/ you by default look from where you are up, so N moves you down and n up.
+AAAlso, when moving around in a file, ctrl+g takes you to moving mode, and then if you hit G you go to the bottom, gg to the top, and
+line number + G back to your original spot.
+
+dict note: you can add items to a dict without erasing the original dict.  here's how that looks:
+d= {1:2}
+d[1]
+2
+d[1]= d[1], 3
+>d
+{1:(2,3)}
