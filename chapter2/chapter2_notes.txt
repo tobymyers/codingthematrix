@@ -40,3 +40,8 @@ d[1]
 d[1]= d[1], 3
 >d
 {1:(2,3)}
+
+dont' know how to access keys from dicts, or keys from lists to put those names into a list of the subset that makes up the answer
+with my test equality function had a funny thing happen which was that I put an else in as True within a for loop,
+so I kept getting different outputs based on which dict key the function chose to evaluate first.
+Took the return True outside the for loop and works like a charm. 

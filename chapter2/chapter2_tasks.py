@@ -1,8 +1,8 @@
-# #2.3.2
+#2.3.2
 from plotting import *
 L = [[2,2], [3,2], [1.75, 1], [2,1], [2.25, 1], [2.5, 1], [2.75, 1], [3, 1], [3.25, 1]]
-#plot(L,6, browser ='chrome')
-#
+# plot(L,6, browser ='chrome')
+
 #2.4.2
 def goEast(v, w): return v[0]+1, v[1]+2
 print (goEast([4,4],None))
@@ -23,23 +23,23 @@ def scale(scalar, vector): return [scalar * vector[i] for i in range(len(vector)
 #plot(scale(-0.5,L), 6, browser = 'chrome')
 
 #2.6.1
-# w = 4/3 b/c line between 2 points == slope
-#translation = f(x, y) = x+2, y+3
+w = 4/3 b/c line between 2 points == slope
+translation = f(x, y) = x+2, y+3
 
 #2.6.2 line segment between 2 vectors 1,4 and 6, 3
-#{alpha|5,-1| + |1, 4| : alpha between 0 and 1}
+{alpha|5,-1| + |1, 4| : alpha between 0 and 1}
 #check this later.
 #2.6.6 tabling this proof.  made some progress and proved it out with a bunch of real numbers but proofs are
 #hard AF
 
 #2.6.9 write a procedure that lets us plot 100 points between two line segments using convex combination
 def segment(u, v): #return [[u*(i/100.0)], [v]  for i,i in range(100)]
-     out = []
-     for i in range(100):
-         up = i/100
-         down = 1-i/100
-         out.append([(u[0] * up )+(v[0]* down), (u[1]*up)+ (v[1] * down)])
-     return out
+      out = []
+      for i in range(100):
+          up = i/100
+          down = 1-i/100
+          out.append([(u[0] * up )+(v[0]* down), (u[1]*up)+ (v[1] * down)])
+      return out
 plot(segment([3.5, 3], [0.5,1]), 6, browser = 'chrome')
 #get_item
 def get_item(v,d): return v.f[d] if d in v.f else 0
@@ -48,7 +48,7 @@ from chapter2_vec import *
 def add(Vec1, Vec2): return Vec(u.D, {d:get_item(u,d) + get_item(v, d) for d in u.D})
 #this only works if these Vecs have the same domain
 
-#2.7.5
+ #2.7.5
 def neg(v): return {l:-f for l,f in v.f.items()}
 
 #2.8.4/.7 solve lights out/represent a given vector as the sum of a set of other vectors over GF(2)
@@ -98,6 +98,36 @@ button_vecs = {(0, 0): {(0, 0): one, (1, 0): one, (0, 1): one },
     (4, 3): {(4, 3): one, (3, 3): one, (4, 4): one, (4, 2): one},
     (4, 4): {(4, 4): one, (3, 4): one, (4, 3): one}}
 
+def wonstate(): return {(i,j):0 for i in range(5) for j in range(5)}
+
 def solve():
     state = rand_state()
-#add button vectors until I find one that == s 
+    subset = set()
+    count = 0
+    while state != wonstate():
+        count += 1
+        #get random button vec
+        randint1, randint2 = randint(0,4), randint(0,4)
+        one_button = button_vecs[randint1,randint2]
+        #add selected one_button to subset:
+        subset.add(tuple(one_button.keys()))
+        #add state & a vector:
+        for v, k in one_button.items():
+            if v in state:
+                state[v] = state[v]+k
+        print(count)
+    print(subset)
+    print(state)
+
+#2.9.23 prove that (alpha*u)*v == alpha(u*v)
+#Au dot x == A(u dot x)
+#A[u1, u2...uN] dot [x1, x2, xN]
+#Au1x1 + Au2x2 + AuNxN
+#A(u+x) == Au + Ax!
+#Apply line 126 to 125, and we get:
+#A(u1x1 + u2x2 + uNxN)
+#within the paretheses of 128 is the definition of a dot product, so:
+#A(u dot x)
+
+#2.9.24 give an example where this isn't the case
+#tried out negative nums, complex nums, negative alpha, zero alpha, nothing so far changes it.
