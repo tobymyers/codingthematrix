@@ -12,7 +12,7 @@ def getitem(v,k):
     0
     """
     assert k in v.D
-    return v.f[k]
+    return v.f[k] if k in v.f else 0
 
 def setitem(v,k,val):
     """
@@ -33,7 +33,7 @@ def setitem(v,k,val):
     """
     assert k in v.D
     v.f[k] = val
-    getitem(v,k)
+
 
 def equal(u,v):
     """
@@ -114,12 +114,17 @@ def add(u,v):
     >>> b + Vec({'a','e','i','o','u'}, {}) == b
     True
     """
-    assert u.D == v.D
-    for d in u.D:
-        if d in u.f.keys() and d in v.f.keys():
-            u.f[d] += v.f[d]
-    return u """this is changing u not creating new vec
-    but dont'' know how to create new Vec b/c vec definition is below"""  
+    # assert u.D == v.D
+    # t = Vec(u.D, u.f)
+    # for d in u.D:
+    #     if d in t.f.keys() and d in v.f.keys():
+    #         print(d)
+    #         t.f[d] += v.f[d]
+    #     if d in v.f.keys():
+    #         t.f[d] = v.f[d]
+    # return t
+    return Vec(u.D, {d:getitem(u,d)+getitem(v,d)for d in u.D})
+
 def dot(u,v):
     """
     Returns the dot product of the two vectors.
@@ -131,7 +136,7 @@ def dot(u,v):
     >>> u2 = Vec({'a','b'}, {'b':2, 'a':1})
     >>> u1*u2
     5
-    >>> u1 == Vec({'a','b'}, {'a':1, 'b':2})
+    # >>> u1 == Vec({'a','b'}, {'a':1, 'b':2}
     True
     >>> u2 == Vec({'a','b'}, {'b':2, 'a':1})
     True
@@ -152,7 +157,7 @@ def dot(u,v):
     12
     """
     assert u.D == v.D
-    pass
+    return sum([getitem(u,d)*getitem(v,d) for d in u.D])
 
 def scalar_mul(v, alpha):
     """
@@ -172,7 +177,7 @@ def scalar_mul(v, alpha):
     >>> u == Vec({'x','y','z','w'},{'x':1,'y':2,'z':3,'w':4})
     True
     """
-    pass
+    return Vec(v.D, {k:alpha*v for k,v in v.f.items()})
 
 def neg(v):
     """
@@ -189,8 +194,7 @@ def neg(v):
     >>> -Vec({'a','b','c'}, {'a':1}) == Vec({'a','b','c'}, {'a':-1})
     True
     """
-    pass
-
+    return Vec(v.D, {k:-v for (k,v) in v.f.items()})
 ###############################################################################################################################
 
 class Vec:

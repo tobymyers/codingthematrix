@@ -44,4 +44,9 @@ d[1]= d[1], 3
 dont' know how to access keys from dicts, or keys from lists to put those names into a list of the subset that makes up the answer
 with my test equality function had a funny thing happen which was that I put an else in as True within a for loop,
 so I kept getting different outputs based on which dict key the function chose to evaluate first.
-Took the return True outside the for loop and works like a charm. 
+Took the return True outside the for loop and works like a charm.
+Things learned 6/22:
+assert x in y or assert x == y #this raises an assertion error if false.  nicer than returning False or True
+enumerate a list returns the index of the list along iwth it;s value
+don't quite get how we're using our vecs with normal operators as opposed to functions.  must look that up.
+reading other people's code is very helpful.  gotta make sure it's good though.
