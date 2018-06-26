@@ -50,3 +50,9 @@ assert x in y or assert x == y #this raises an assertion error if false.  nicer 
 enumerate a list returns the index of the list along iwth it;s value
 don't quite get how we're using our vecs with normal operators as opposed to functions.  must look that up.
 reading other people's code is very helpful.  gotta make sure it's good though.
+
+learned 6/23/18: he's doing something funky naming functions def __func__ which allows him
+to use normal operators instead of calling them.  this is very cool in the context of a command line user interface.
+line interface.
+
+if you define a bunch of functions in the same file as a class definition you can use the class above its definition.  
