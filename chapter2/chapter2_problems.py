@@ -11,6 +11,7 @@
 #2.14.4
 from GF2 import *
 from random import randint
+from collections import Counter
 
 a = [one, one, one ,0,0,0,0]
 b = [0, one, one,one ,0,0,0]
@@ -22,19 +23,21 @@ u = [0,0, one,0,0,one, 0]
 
 vecs = [a,b,c,d,e,f]
 vecs_labels = ['a','b','c','d','e','f']
-trye = []
-subset = []
-ans = a
-while ans != u:
-    rand = randint(0,5)
-    trye =  vecs[rand]
-    subset.append(vecs_labels[rand])
-    ans = [t+a for (t,a) in zip(trye, ans)]
-
-print (ans, 'ans' ,subset, 'subset')
-print( [E+D+C for (E,D,C) in zip(e,d,c)])
-#this gets a real set, but i need to figure out which of the instances appear an even
-#num of times compared to an odd num of times 
+def solve_GF2_add(vecs, vecs_labels):
+    trye = []
+    subset = []
+    ans = a
+    while ans != u:
+        rand = randint(0,5)
+        trye =  vecs[rand]
+        subset.append(vecs_labels[rand])
+        ans = [t+a for (t,a) in zip(trye, ans)]
+    histo = Counter(subset)
+    dedupe = set()
+    for label in vecs_labels:
+        if histo[label]%2 != 0:
+            dedupe.add(label)
+    return dedupe,'==', ans
 
 #for u1, e+d+c
 #for u2, cancel e d+a+c+e+b

@@ -55,4 +55,9 @@ learned 6/23/18: he's doing something funky naming functions def __func__ which 
 to use normal operators instead of calling them.  this is very cool in the context of a command line user interface.
 line interface.
 
-if you define a bunch of functions in the same file as a class definition you can use the class above its definition.  
+if you define a bunch of functions in the same file as a class definition you can use the class above its definition.
+
+learnings 6/27?/18:  turns out that most senators agree significantly more than they disagree, or at least they used to
+almost every single dot product is positive, which is crazy!  i don't think I'm doing it wrong either.
+You can't alter dictioaries while you're iterating over them.  There's also such a thing as a shallow copy and a deep copy: dict() is shallow, .copy is deep
+It would be cool to write a service that looks at how much politicians agree over time, or host a web service where you can look all that up, and search by different senators

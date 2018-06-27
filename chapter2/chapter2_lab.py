@@ -28,7 +28,7 @@ print(least_similar('Santorum', voting_dict)) #Feingold, 4
 print(most_similar('Chafee', voting_dict))  #Jeffords, 39
 
 #2.12.6
-print(policy_compare('Feinstein', 'Boxer', voting_dict))
+print(policy_compare('Obama', 'Boxer', voting_dict))
 #31, pretty similar
 
 #2.12.7
@@ -59,4 +59,16 @@ avg = [round(i/(len(summ)),1) for i in summ] #seems like there should be negativ
 for sen, record in voting_dict.items():
     dot = sum([avg[i]*record[i] for i in range(len(summ))])
     result.append((dot, sen))
-print(max(result))
+print(max(result)) #Biden again!!  Different b/c of rounding errors
+
+#2.12.9
+def bitter_rivals(original_voting_dict):
+    voting_dict = dict(original_voting_dict)
+    rivals = set()
+    for sen, record in voting_dict.items():
+        for sen2, record2 in voting_dict.items():
+            rivals.add((policy_compare(sen, sen2, voting_dict), sen, sen2))
+    return min(rivals)
+print(bitter_rivals(voting_dict),'<<most bitter rivals, but still only disagree a tiny bit more than they agree')
+
+print(policy_compare('Obama', 'McCain', voting_dict),'Obama/McCain')
