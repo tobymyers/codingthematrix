@@ -61,3 +61,12 @@ learnings 6/27?/18:  turns out that most senators agree significantly more than 
 almost every single dot product is positive, which is crazy!  i don't think I'm doing it wrong either.
 You can't alter dictioaries while you're iterating over them.  There's also such a thing as a shallow copy and a deep copy: dict() is shallow, .copy is deep
 It would be cool to write a service that looks at how much politicians agree over time, or host a web service where you can look all that up, and search by different senators
+
+learnings 6/29/18:  finished Vec by changing just the equals function.  also discovered that
+if you count '' as a combination of 'a' 'b' 'c' then it's just 2^n, and if not, 2^n -1.  Yesterday though
+derived that w/out the '' it's also 2^n(n+1)/2 which is dope and might be more efficent? idk.
+sooooo satisfying to figure that out all by myself!  also learned that you can put
+doctests right in the file, and call them with python3 -m doctest  vec.py for example. this makes testing better/easier!
+
+it's odd but 2^n-1 is often prime, and it turns out that theres a name for them, MErsene Primes.
+The exponents that give these primes tend to be primes themselves, which is super interesting!

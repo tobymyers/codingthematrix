@@ -69,16 +69,23 @@ def equal(u,v):
     False
     """
     assert u.D == v.D
-    for d in u.D:
-        if d in u.f.keys() and d in v.f.keys() and u.f[d] != v.f[d]:
-            return False #same keys different values
-        elif d in u.f.keys() and u.f[d] != 0:
-            return False #d is in u and not 0
-        elif d in v.f.keys() and v.f[d] != 0:
-            return False #d is in v and not 0
-        else:
-            return True
-
+    u.F = {k:getitem(u, k) for k in u.D}
+    v.F = {k:getitem(v, k) for k in v.D}
+    return u.F == v.F
+    #
+    # for d in u.D:  ##fuck this complicated stuff. issue with current version though is that
+    #it'll probably do a bad job for huuuuuge dictionaries
+    #     if d in u.f.keys() and d in v.f.keys():
+    #         and u.f[d] != v.f[d]
+    #         print('non-matching')
+    #         return False #same keys different values
+    #     elif d in u.f.keys() and u.f[d] != 0:
+    #         return False #d is in u and not 0
+    #     elif d in v.f.keys() and v.f[d] != 0:
+    #         return False #d is in v and not 0
+    #     else:
+    #         return True
+    #
 
 def add(u,v):
     """
@@ -136,7 +143,7 @@ def dot(u,v):
     >>> u2 = Vec({'a','b'}, {'b':2, 'a':1})
     >>> u1*u2
     5
-    # >>> u1 == Vec({'a','b'}, {'a':1, 'b':2}
+    >>> u1 == Vec({'a','b'}, {'a':1, 'b':2})
     True
     >>> u2 == Vec({'a','b'}, {'b':2, 'a':1})
     True
