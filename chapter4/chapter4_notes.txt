@@ -1,0 +1,5 @@
+matrix is essentially an excel sheet defined rows, columns where a 3x4 one would have
+3 rows and 4 columns.
+you could make one out of a list of row lists or a list of column lists, and each of them
+would be a vector.  You can define each point as a function from RXC to whatever.  And this would
+be a dictionary with ('row','column':value).  this is sort of like a point on a plane, but you get to name it
