@@ -3,3 +3,61 @@ matrix is essentially an excel sheet defined rows, columns where a 3x4 one would
 you could make one out of a list of row lists or a list of column lists, and each of them
 would be a vector.  You can define each point as a function from RXC to whatever.  And this would
 be a dictionary with ('row','column':value).  this is sort of like a point on a plane, but you get to name it
+
+ok some very cool vim stuff this am.  in bash type vim file_name to create a new one and open it and :wq to save it
+this is just like using atom except itll work on literally any machine which is sweet!
+:q! exists without saving changes.  in terms of editing/running a file it's pretty speedy too.  would have to configure vim to allow
+for italics, boldness etc  that I'm used to now.
+
+I could now solve lights out for upper triangular matrices/systems of linear equations with reverse substitution.  that's it for now though.
+vector matrix is a len(rows) vector * matrix, or over-->up, and matrix vector is a len(columns) vec * columns or down ---> over.  to get from one to
+the other we can just transpose, which will always work for a matrix where |R| == |C| (len() len())
+such as with an identity matrix, but at that point you wouldn't need to do it anyway :)
+
+residual vector is the computed solution to a M * v multiplication or similar
+subtracted from the Beta vector.  Basically it's a check to see if your answer is correct
+if the answer is correct, your residual will be 0
+
+My explanation of how error correcting codes work in general and how the hamming code works specifically for a friend who I'm teaching:
+1) the problem that we're solving is that bits over a noisy channel sometimes flip.  for example, if I'm sending bits over a cell phone channel
+   they flip. for example 0011 could go to 0111.  In order to stop that from happening, I'd like to be able to
+   encode my 0011 to something such that even if there was an error, the person I'm texting will get the right message
+2) lets say that I encode my four bit message to a seven bit message. the seven bit message is called a codeword, example 1001100
+   this codeword, after passing through the noisy channel, gets CORRUPTED! now its 1001110.
+3) so, 1001100 == codeword, c and 1001110 == my corrupt-codeword, cc.  Lets say c == cc - error, e
+4) the error here is the difference between c and cc, so a 1 in the index 5 position.  Our full e is 0000010
+  c dot H is the null space of H, that is, the zero vector.  That helps us out a lot.  Here's how
+6) the knowledge that c * H should be the zero vector means that if there were no errors, cc * H will be zero too, and if they differ, we know there's an error.
+   the math.  cc * H == (c+e) * H == c * H + e * H == 0 + e * H == e * H, b/c of the distributive property of matrix vector multiplication (flip so its H * e)
+7) the receiver can compute H * cc b/c that's what comes out of the channel, so the receiver can compute H * e too!  based on what we just showed above
+8) H for the HAmming code the matrix with columns  that are binary 1 - 7, more importantly its the Span of a 3 vector over gf2 w/out the zero vector
+9) This makes it easy to figure out the error, it's just e * H.
+10) for other error correcting codes there are other ways of doing it.  THe point is, an error correcting function will be one such that it's possible to compute H * e based on the receipt of cc.
+
+learnings 7/29/18 it's getting easier to understand what the book is saying.  it gets even a bit easier if I breathe through it.  I think I might be learning how to speak math a bit :)
+
+7/30/18 turns out the easiest way to ensure accurate M*v multiplication is to just loop over the vector, and multiply by
+each M(i, j) if it has a value.  a sparse representation won't give zeros at all, so all zeros get skipped naturally.
+so you're just going down the line and multiplying by each value and then summing them for each row.
+
+with deriving a matrix, you have a function that maps a given vector x to the matrix vector product m * x.
+each column can be defined most simply by passing in the standard generator with a one in that position.
+it's essentially multiplying that column by 1 and leaving everything else as 0.  so if I pass [1,0] ill get the 1st column,
+and if I pass [0,1] then I've found the second column, whatever it's spec happens to be.
+This allows me to think about my matrix column by column.  If I'm passing points xy in an R2 x R2 matrix, first things first the
+C is the pre-image and the r is the image.  a point i,j is just the same as on a 2x2 graph except I'm mapping x values to new x values and y values to new y values.  its like it's one level up sort of.
+so my columns are x,y and my rows are also x,y. I define my matrix and function such that f(s) = M * s, so I give it an x,y and my output is another single x,y.
+all this is a fancy way at looking at the insides of a function, seeing all the possible outputs regardless of input, and separating x and y variables.
+
+
+ yesterday we did matrix vector multiplication where an individual column
+  is given by the standard generator for that column passed into the function.  output is the R vector.  not super sure what you do with the matrix itself but I imagine it's useful somehow.  ithis allows you to go from the function to the Matrix.
+   from matrix to function is you know domain is C, and co-domain is R.  for example a matrix that rotates a point in R2 around the origin would be you give it 01, it gives you -1,0, you give it the other standard generator 10, it gives you 01.
+
+a linear function is one which satisfies Af(x) == f(Ax) and f(u+v) == f(u)+f(v)
+weirdly x,y --> xy doesn't work and x,y ---> x+y does work... would have expected the opposite but its probs order of operations stuff that I don't want to think about
+right now.
+
+8/3/18 when proving that for example rotation by 90 degrees is a linear function got to
+show that it satisfies the two properties.  for example, with a property like Af(u) == f(Au) got to show
+that you can get from one to the other with that function.  for this to work got to do it in terms of [x,y], not in terms of [1,0], although this is what you would use to derive the matrix for the function.
