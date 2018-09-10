@@ -65,4 +65,9 @@ print(my_union([{1},{2,1}, {5,4}]))
 #1.7.11
 #a e**3j
 #b e**(11pi/12)i
-c# still working here 
+c# still working here
+
+#1.7.13
+#a 1
+#b 0
+#c 0

@@ -64,6 +64,7 @@ a) a,b
 b) #,@, ?
 c) 10, -1
 
+"""
 """quiz 4.10.5 [x,y] ---> xy not a linear function
 example f(4,4) == 16 != f(2,2) +f(2,2)= 4+4 == 8
 violates property 2 """
@@ -84,4 +85,31 @@ Af(x,y) == [Ax, Ay, A1] violates property 1
 h= f(x,y) = (-x,y)
 property 1: Af(h) == Af(x,y) == A(-x,y) == A-x, Ay
                   == f(A(x,y)) == Ax,Ay == -Ax, Ay
-                  """
+"""
+"""example 4.9.6 doesn't follow the pattern and violates prop 1
+it maps x,y --> x+1, y +2.  Af(1,2) = (9,9) with A == 3 and f(A(1,2)) == 7,5
+"""
+"""problem 4.10.12 prove that Ker f is a vector space #have not done this one
+l1, by lemma 4.10.10 f(0) = 0 between two vector spaces
+l2, for v in V, f(v) must be 0 for it to be in ker 0, and 0+0 is 0, so closed under vector addition so good here
+l3, for v in V, f(v) must be 0 for it to be in ker 0, and 0*0 is 0, so closed under vector multiplication so good here"""
+"""
+
+
+
+4.7.1 Prove Equation 4.4
+All we have to show is that entry r of the left side == entry r of the right side.
+1) the left side == the dot product of row r of M with (u+v)
+2) the right side == the dot product of row r of M with u + dot product of row r of M with v
+3) by the distributivity of the dot product w dot (u+v) == w dot u + w dot v, the right and left sides are equal"""
+
+"""-
+4.10.8 is h:r2 --> r2 that flips a point around the y axis linear?  give an algebraic explanation
+yes it's linear.  f(u + v) == -2u, 2v and f(u)+ f(v) == -2u, 2v so that's solid
+and Af(x,y) == -Ax, Ay and f(A(x,y)) == -Ax, Ay so both L1 and L2 are good! """
+
+def diag(D, entries):
+    return Mat((D,D), {(d,d):entries[d] for d in D}).print()
+D = ['a','b','c']
+entries = {'a':1,'b':2, 'c':3}
+print(diag(D, entries))

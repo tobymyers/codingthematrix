@@ -61,3 +61,9 @@ right now.
 8/3/18 when proving that for example rotation by 90 degrees is a linear function got to
 show that it satisfies the two properties.  for example, with a property like Af(u) == f(Au) got to show
 that you can get from one to the other with that function.  for this to work got to do it in terms of [x,y], not in terms of [1,0], although this is what you would use to derive the matrix for the function.
+
+9/6/18 ok back at it.  because a linear function satisfies L1 and L2, if you pass a linear function a flat the output will be a flat too.
+the idea that a linear funtion is one to one if and only if it's kernel is the trivial ecotr space makes sens for the following reasonsL  we already know that for two vecotr spaces, the zero vector passed through the linear function must be the zero vector
+and, for the funciton to be one to one, the zero vectoe can only map to one thing. if the pre-image of the zero vector was anything other than the zero vector, then it wouldn't be one to one by definition because something else would have to map to it.
+if a function is one to one, than x in the equation A * x == b can be thought of as the finding the pre-image of b under the function f.
+if f is one to one, the solution x must be unique.

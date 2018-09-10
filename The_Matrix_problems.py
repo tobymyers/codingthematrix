@@ -8,9 +8,9 @@ from vec import Vec
 
 ## 1: (Problem 4.17.1) Computing matrix-vector products
 # Please represent your solution vectors as lists.
-vector_matrix_product_1 = ...
-vector_matrix_product_2 = ...
-vector_matrix_product_3 = ...
+vector_matrix_product_1 = [1, 0]
+vector_matrix_product_2 = [0, 4.44]
+vector_matrix_product_3 = [14, 20, 26]
 
 
 
@@ -18,17 +18,17 @@ vector_matrix_product_3 = ...
 # Represent your solution as a list of rowlists.
 # For example, the 2x2 identity matrix would be [[1,0],[0,1]].
 
-M_swap_two_vector = ...
+M_swap_two_vector =[[0,1], [1,0]]
 
 
 
 ## 3: (Problem 4.17.3) [z+x, y, x] Matrix-vector multiplication
-three_by_three_matrix = ... # Represent with a list of rowlists.
+three_by_three_matrix =  [[1,0,1], [0,1,0], [1,0,0]]
 
 
 
 ## 4: (Problem 4.17.4) [2x, 4y, 3z] matrix-vector multiplication
-multiplied_matrix = ... # Represent with a list of row lists.
+multiplied_matrix =  [[2,0,0], [0,4, 0], [0,0, 3]]
 
 
 
@@ -36,33 +36,33 @@ multiplied_matrix = ... # Represent with a list of row lists.
 # Please enter a boolean representing if the multiplication is valid.
 # If it is not valid, please enter None for the dimensions.
 
-part_1_valid = ... # True or False
-part_1_number_rows = ... # Integer or None
-part_1_number_cols = ... # Integer or None
+part_1_valid = False
+part_1_number_rows = None
+part_1_number_cols = None
 
-part_2_valid = ...
-part_2_number_rows = ...
-part_2_number_cols = ...
+part_2_valid = False
+part_2_number_rows = None
+part_2_number_cols = None
 
-part_3_valid = ...
-part_3_number_rows = ...
-part_3_number_cols = ...
+part_3_valid = True
+part_3_number_rows = 1
+part_3_number_cols = 2
 
-part_4_valid = ...
-part_4_number_rows = ...
-part_4_number_cols = ...
+part_4_valid = True
+part_4_number_rows = 2
+part_4_number_cols = 1
 
-part_5_valid = ...
-part_5_number_rows = ...
-part_5_number_cols = ...
+part_5_valid = False
+part_5_number_rows = None
+part_5_number_cols = None
 
-part_6_valid = ...
-part_6_number_rows = ...
-part_6_number_cols = ...
+part_6_valid = True
+part_6_number_rows = 1
+part_6_number_cols = 1
 
-part_7_valid = ...
-part_7_number_rows = ...
-part_7_number_cols = ...
+part_7_valid = True
+part_7_number_rows = 3
+part_7_number_cols = 3
 
 
 
@@ -138,7 +138,7 @@ def lin_comb_mat_vec_mult(M, v):
     Output: M*v
     The following doctests are not comprehensive; they don't test the
     main question, which is whether the procedure uses the appropriate
-    linear-combination definition of matrix-vector multiplication. 
+    linear-combination definition of matrix-vector multiplication.
     Examples:
     >>> M=Mat(({'a','b'},{'A','B'}), {('a','A'):7, ('a','B'):1, ('b','A'):-5, ('b','B'):2})
     >>> v=Vec({'A','B'},{'A':4, 'B':2})
@@ -163,7 +163,7 @@ def lin_comb_vec_mat_mult(v, M):
     Output: v*M
     The following doctests are not comprehensive; they don't test the
     main question, which is whether the procedure uses the appropriate
-    linear-combination definition of vector-matrix multiplication. 
+    linear-combination definition of vector-matrix multiplication.
     Examples:
       >>> M=Mat(({'a','b'},{'A','B'}), {('a','A'):7, ('a','B'):1, ('b','A'):-5, ('b','B'):2})
       >>> v=Vec({'a','b'},{'a':2, 'b':-1})
@@ -186,7 +186,7 @@ def dot_product_mat_vec_mult(M, v):
     Return the matrix-vector product M*v.
     The following doctests are not comprehensive; they don't test the
     main question, which is whether the procedure uses the appropriate
-    dot-product definition of matrix-vector multiplication. 
+    dot-product definition of matrix-vector multiplication.
     Examples:
     >>> M=Mat(({'a','b'},{0,1}), {('a',0):7, ('a',1):1, ('b',0):-5, ('b',1):2})
     >>> v=Vec({0,1},{0:4, 1:2})
@@ -208,7 +208,7 @@ def dot_product_vec_mat_mult(v, M):
     '''
     The following doctests are not comprehensive; they don't test the
     main question, which is whether the procedure uses the appropriate
-    dot-product definition of vector-matrix multiplication. 
+    dot-product definition of vector-matrix multiplication.
     Examples:
       >>> M=Mat(({'a','b'},{0,1}), {('a',0):7, ('a',1):1, ('b',0):-5, ('b',1):2})
       >>> v=Vec({'a','b'},{'a':2, 'b':-1})
@@ -255,7 +255,7 @@ most_agreeing_pair_of_countries = {..., ...}
 def dictlist_helper(dlist, k):
     '''
     Input: a list dlist of dictionaries which all have the same keys, and a key k
-    Output: the list whose ith element is the value corresponding to the key k 
+    Output: the list whose ith element is the value corresponding to the key k
             in the ith dictionary of dlist
     Example:
     >>> dictlist_helper([{'apple':'Apfel','bread':'Brot'},{'apple':'manzana', 'bread':'pan'},{'apple':'pomme','bread':'pain'}], 'apple')
@@ -284,4 +284,3 @@ are_inverses1 = ...
 are_inverses2 = ...
 are_inverses3 = ...
 are_inverses4 = ...
-

@@ -60,3 +60,24 @@ print(solve_GF2_add(vecs, vecs_labels,  [one,one ,one,0,0,one, 0])) #does not ex
 print(solve_GF2_add(vecs, vecs_labels,  [one,one ,one,one,0,one, 0])) #efd
 
 #2.14.6
+#x == 1000
+# x + 1111 == 0111, x still has odd number of ones, and one of them intersects a one in
+#vector so all good
+
+#2.14.7
+#[2,3,-4,1] dot x == 10
+#[1,-5, 2, 0] dot x == 35
+#[4, 1, -1, -1] dox x == 8
+
+#2.14.8
+from plotting import *
+l = [((((i/100)* 4.5) -1.5), (((i/100) * -2) + 2)) for i in range(100)]#this one isn't going negative
+print(plot(l, 30, browser = 'Chrome'))
+l = [((((i/100)* 4) -2), (((i/100) * -1) + 2)) for i in range(100)]
+print(plot(l, 4, browser = 'Chrome'))
+
+#2.14.9
+#a -5
+#b 6
+#c 16
+#d -1 
