@@ -67,3 +67,13 @@ the idea that a linear funtion is one to one if and only if it's kernel is the t
 and, for the funciton to be one to one, the zero vectoe can only map to one thing. if the pre-image of the zero vector was anything other than the zero vector, then it wouldn't be one to one by definition because something else would have to map to it.
 if a function is one to one, than x in the equation A * x == b can be thought of as the finding the pre-image of b under the function f.
 if f is one to one, the solution x must be unique.
+
+9/10/10 lraned a couple invredibly useful things yesterday about the point of linear algebra.  basically it's a tool that lets you bring excel into math form. to represent an entire, very complicated excel sheet with a single variable.  this is useful af.
+the best metaphor for matrix matrix mnultiplication is that you've got your input columns, and you pour those sideways into the top of your operations matrix, then the operations matrix spits them out as columns again, and you're good!  updated data.
+an operations matrix can be represented as a function, this is just  a more efficient way to do this when you've got a lot of variables etc.
+The whole linear thing: you can model a linear function or a non-linear function with a matrix, it's just that linear ones are more useful b/c you can predict based on one input what any input will be.  The whole Ag(x) g(Ax) thing is
+that you can scale the image or the pre-image and you get the same thing.  best analogy for this is to think of a line with a slope.
+
+9/13/18 ust wrote a pretty complex comprehension and it passed first time no problem!  this has never happened before and is really exciting.  That would have taken me hours before!  really do need a mentor though.  I wonder how I could get one.
+for the next one wrote it in onw try, it had one error, and then fixd the error on the firs try, based mostly on intuition.  this ability to develop the intuition to do a good job is incredibly cool remember this when I can't do shit tomorrow or the next day :)G
+ok, the vec_matrix mul literally took me half an hour to figure out, and the end result ended up being a pretty simple fix.  when things aren't working, makes sense to think it torugh a little bit more probably.  need to read something on trouble shooting, and different strategies b/c right now I'm just running around like a chicken with my head cut off. 
