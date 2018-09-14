@@ -235,8 +235,10 @@ def matrix_matrix_mul(A, B):
     True
     """
     assert A.D[1] == B.D[0]
-    pass
-
+    #break one matrix into vectors
+    #do mat_vec mul for each vec
+    #combine all the vecs
+    B_vecs = Vec(B.D[0], [{i:getitem(B,(i,j)) for i in B.D[0] for j in B.D[1] if j == k} for k in B.D[1]])
 ################################################################################
 
 class Mat:
