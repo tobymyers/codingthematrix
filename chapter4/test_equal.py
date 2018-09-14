@@ -11,27 +11,30 @@ M1 = Mat(({1, 2, 3}, {'a', 'b', 'c'}), {(1, 'b'): 2, (2, 'a'):-1, (3, 'a'): 1, (
 
 C = Mat(({0,1,2}, {'a','b'}), {(0,'a'):4, (0,'b'):-3, (1,'a'):1, (2,'a'):1, (2,'b'):-2})
 D = Mat(({'a','b'}, {'x','y'}), {('a','x'):3, ('a','y'):-2, ('b','x'):4, ('b','y'):-1})
-
+A = Mat(({0,1,2}, {0,1,2}), {(1,1):4, (0,0):0, (1,2):1, (1,0):5, (0,1):3, (0,2):2})
+B = Mat(({0,1,2}, {0,1,2}), {(1,0):5, (2,1):3, (1,1):2, (2,0):0, (0,0):1, (0,1):4})
+#    >>> A*B == Mat(({0,1,2}, {0,1,2}), {(0,0):15, (0,1):12, (1,0):25, (1,1):31})
 def mat_mat(A,B):
+
     B_vecs = [Vec(B.D[0], {i:getitem(B,(i,j)) for i in B.D[0] for j in B.D[1] if j == k}) for k in B.D[1]]
     print(B_vecs)
-    new_vecs = [matrix_vector_mul(A,v) for v in B_vecs] #good till here
-    #leaving this here for tonight
-    A_B = Mat((A[0], B[1]), {(i,j):0 for j in A.D[0] for i in B.D[1]})
-    print(A_B)
-    pre =[{(i,j):getitem(A,(j,i))*vecget(v,V) for (i,V) in zip(A.D[1], v.D) for j in A.D[0]} for v in B_vecs]
-    f = {(i,j):0 for i in A.D[0] for j in B.D[1]}
-    for i in A.D[0]:
-        for p in pre:
-            print(p, "onevecf")
-            for (k,v) in p.items():
-                if i in k:
-                     print(k,v, "kv")
-                     f[k]+=v
-    print(f)
+    print(A,'a', B,'b')
+    R = A.D[0]
+    C = B.D[1]
+    new_mat = Mat((R,C),{(r,c):0 for r in R for c in C})
+    print(new_mat, 'mewmat')
+    C = list(B.D[1])
+    columns = [matrix_vector_mul(A,v) for v in B_vecs]
+    print(columns)
+    column = ''
+    for i in range(len(C)):
+        column = columns[i]
+        print(column, 'colunm', C[i], 'label')
+        for (R,val) in column.f.items():
+            setitem(new_mat,(R,C[i]),val)
+    return new_mat
 
 
-    new_vecs = [matrix_vector_mul(A,v) for v in B_vecs] #good till here
-    A_B = Mat((A[0], B[1]), {(j,i):v for (i,v) in v.f.items() for (a,j) in zip(new_vecs,B.D[1])})
-    print(A_B)
-mat_mat(C,D)
+print(mat_mat(A,B))
+print()
+print(Mat(({0,1,2}, {0,1,2}), {(0,0):15, (0,1):12, (1,0):25, (1,1):31}))

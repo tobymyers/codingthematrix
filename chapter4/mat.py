@@ -198,6 +198,10 @@ def matrix_vector_mul(M, v):
     >>> v3 = Vec({'a','b'},{'a':1,'b':1})
     >>> M3*v3 == Vec({0, 1},{0: 2, 1: 2})
     True
+    >>> M4 = Mat(({'a','b'},{'a','b'}), {('a','a'):1})
+    >>> v4 = Vec({'a','b'},{'a':1,'b':1})
+    >>> M4*v4 == Vec({'a','b'},{'a':1})
+    True
     """
     assert M.D[1] == v.D
     pre =({(i,j):getitem(M,(j,i))*vecget(v,V) for (i,V) in zip(M.D[1], v.D) for j in M.D[0]})
@@ -215,7 +219,7 @@ def matrix_matrix_mul(A, B):
     Consider using brackets notation A[...] and B[...] in your procedure
     to access entries of the input matrices.  This avoids some sparsity bugs.
 
-    >>> A = Mat(({0,1,2}, {0,1,2}), {(1,1):4, (0,0):0, (1,2):1, (1,0):5, (0,1):3, (0,2):2})
+    >>> A = Mat(({0,1,2}, {1,0,2}), {(1,1):4, (0,0):0, (1,2):1, (1,0):5, (0,1):3, (0,2):2})
     >>> B = Mat(({0,1,2}, {0,1,2}), {(1,0):5, (2,1):3, (1,1):2, (2,0):0, (0,0):1, (0,1):4})
     >>> A*B == Mat(({0,1,2}, {0,1,2}), {(0,0):15, (0,1):12, (1,0):25, (1,1):31})
     True
@@ -237,8 +241,21 @@ def matrix_matrix_mul(A, B):
     assert A.D[1] == B.D[0]
     #break one matrix into vectors
     #do mat_vec mul for each vec
-    #combine all the vecs
-    B_vecs = Vec(B.D[0], [{i:getitem(B,(i,j)) for i in B.D[0] for j in B.D[1] if j == k} for k in B.D[1]])
+    #combine all the vec
+    B_vecs = [Vec(B.D[0], {i:getitem(B,(i,j)) for i in B.D[0] for j in B.D[1] if j == k}) for k in B.D[1]]
+    R = A.D[0]
+    C = B.D[1]
+    new_mat = Mat((R,C),{(r,c):0 for r in R for c in C})
+    C = list(B.D[1])
+    columns = [matrix_vector_mul(A,v) for v in B_vecs]
+    column = ''
+    for i in range(len(C)):
+        column = columns[i]
+        for (R,val) in column.f.items():
+            setitem(new_mat,(R,C[i]),val)
+    return new_mat
+
+
 ################################################################################
 
 class Mat:
