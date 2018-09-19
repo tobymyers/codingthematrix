@@ -1,6 +1,33 @@
 from mat import *
 from vec import getitem as getvec
 
+
+M4 = Mat(({'a','b','c'},{'a','b','c'}), {('a','a'):2,('a','b'):2,('a','c'):5, ('b','c'):3})
+v4 = Vec({'a','b','c'},{'a':1,'b':1,'c':1})
+M4*v4 == Vec({'a','b','c'},{'a':8, 'b':0,'c':3})
+print(M4*v4, M4,v4)
+
+def mat_vec(M,v):
+    assert M.D[1] == v.D
+    pre =({(i,j):getitem(M,(j,i))*vecget(v,V) for (i,V) in zip(M.D[1], v.D) for j in M.D[0]})
+    print(pre)
+    f = {k:0 for k in M.D[0]}
+    for i in M.D[0]:
+        for (k,v) in pre.items():
+             print(i,'i',k,"k")
+             if i in k[0]:
+                 f[k[1]]= f[k[1]] + v
+    return Vec(M.D[0], f)
+
+print(mat_vec(M4,v4))
+
+
+
+
+
+
+
+
 v3 = Vec({'a','b'},{'a':1,'b':1})
 M3 = Mat(({'a', 'b'}, {0, 1}), {('a', 1): 1, ('b', 1): 1, ('a', 0): 1, ('b', 0): 1})
 v3*M3 == Vec({0, 1},{0: 2, 1: 2})

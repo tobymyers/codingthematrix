@@ -76,4 +76,17 @@ that you can scale the image or the pre-image and you get the same thing.  best 
 
 9/13/18 ust wrote a pretty complex comprehension and it passed first time no problem!  this has never happened before and is really exciting.  That would have taken me hours before!  really do need a mentor though.  I wonder how I could get one.
 for the next one wrote it in onw try, it had one error, and then fixd the error on the firs try, based mostly on intuition.  this ability to develop the intuition to do a good job is incredibly cool remember this when I can't do shit tomorrow or the next day :)G
-ok, the vec_matrix mul literally took me half an hour to figure out, and the end result ended up being a pretty simple fix.  when things aren't working, makes sense to think it torugh a little bit more probably.  need to read something on trouble shooting, and different strategies b/c right now I'm just running around like a chicken with my head cut off. 
+ok, the vec_matrix mul literally took me half an hour to figure out, and the end result ended up being a pretty simple fix.  when things aren't working, makes sense to think it torugh a little bit more probably.  need to read something on trouble shooting, and different strategies b/c right now I'm just running around like a chicken with my head cut off.
+
+9/15/18 ok just figured out a lot, including a problem Granite thought was impossible.  So that's exciting!  Going to write down steps as if for a friend
+key idea is that matrices are visual representations of functions.  An matrix mapping r3 to r2 is the same as a function that takes in xyz and spits out xy.
+each row of a matrix shows what will happen to x,y,z on that row.  each row is an operation.
+if a row is totally blank, it can be disregarded completely.  similarly, an identity matrix that maps x,y,z to x,y,z is basically just saying that it outputs the same thing as the input.
+if a column is a 0, it means that any operations that would have taken place there will evaluate to 0.  this DOES NOT mean that the output will be zero, ust that you can disregard those columns when doing hte computation.
+So, if you're looking at a row, and it has values in the x and y columns but nothing in the z column, you know that that row doesn't operate on the z value
+Here's how to figure this out:
+1)realized that 4 of the rows were the identity matrix, and the other three were the addition of three of the other rows.
+2)look at the goal input and outputs, and look at the rows, how do they operate on the rows?
+3)I wanted the pareity rows to basically not exist, so I put them all to zero, and ended ip with an identity matrix masquerading as a 4x7 matrix.
+question: the parity bits cover bits 123, 124, and 134.  what about 234?  i guess the idea here is that each number is covered twice?
+however, would it be possible for there to be a siruation where everything where the error wouldn't be caught in either of the two checks?  for example if they were all zero?  open question, to ponder later 

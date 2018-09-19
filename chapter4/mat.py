@@ -198,19 +198,40 @@ def matrix_vector_mul(M, v):
     >>> v3 = Vec({'a','b'},{'a':1,'b':1})
     >>> M3*v3 == Vec({0, 1},{0: 2, 1: 2})
     True
-    >>> M4 = Mat(({'a','b'},{'a','b'}), {('a','a'):1})
-    >>> v4 = Vec({'a','b'},{'a':1,'b':1})
-    >>> M4*v4 == Vec({'a','b'},{'a':1})
+    >>> M4 = Mat(({'a','b','c'},{'a','b','c','d'}), {('a','a'):1,('a','b'):2,('a','c'):5, ('a','d'):1})
+    >>> v4 = Vec({'a','b','c','d'},{'a':1,'b':1,'c':1})
+    >>> M4*v4 == Vec({'a','b','c'},{'a':8, 'b':0,'c':0,'d':1})
     True
+    >>> M5 = Mat(({1,2},{'a','b'}), {(1,'a'):one, (1,'b'):one, (2,'a'):one, (2,'b'):one})
+    >>> v5 = Vec({'a','b'}, {'a':one, 'b':0})
+    >>> M5*v5 == Vec({1,2}, {1:one, 2:one})
+    True
+    >>> G = Mat(({0,1,2,3,4,5,6}, {0,1,2,3}), {(0,0):one, (0,1):0, (0,2):one, (0,3):one, (1,0):one, (1,1):one, (1,2):0, (1, 3):one, (2,0):0, (2,1):0, (2,2):0, (2, 3):one, (3,0):one, (3,1):one, (3,2):one, (3, 3):0, (4,2):one, (5,1):one, (6,0):one})
+
     """
     assert M.D[1] == v.D
-    pre =({(i,j):getitem(M,(j,i))*vecget(v,V) for (i,V) in zip(M.D[1], v.D) for j in M.D[0]})
-    f = {k:0 for k in M.D[0]}
-    for i in M.D[0]:
-        for (k,v) in pre.items():
-             if i in k:
-                 f[k[1]]+=v
-    return Vec(M.D[0], f)
+    result_vec = Vec(M.D[0],{})
+    for (i,j) in M.f.keys():
+        result_vec[i] = result_vec[i] + M[i,j] * v[j]
+    return result_vec
+    # if True:
+    # if M.D[1] != M.D[0]:
+    #     pre =({(i,j):getitem(M,(j,i))*vecget(v,V) for (i,V) in zip(M.D[1], v.D) for j in M.D[0]})
+    #     f = {k:0 for k in M.D[0]}
+    #     for i in M.D[0]:
+    #         for (k,v) in pre.items():
+    #              if i in k:
+    #                  f[k[1]]= f[k[1]] + v
+    #     return Vec(M.D[0], f)
+    #
+    # else:
+    #     pre =({(i,j):getitem(M,(j,i))*vecget(v,V) for (i,V) in zip(M.D[1], v.D) for j in M.D[0]})
+    #     f = {k:0 for k in M.D[0]}
+    #     for i in M.D[0]:
+    #         for (k,v) in pre.items():
+    #             if i == k[0]:
+    #                  f[k[1]]= f[k[1]] + v
+    #     return Vec(M.D[0], f)
 
 def matrix_matrix_mul(A, B):
     """
@@ -242,18 +263,14 @@ def matrix_matrix_mul(A, B):
     #break one matrix into vectors
     #do mat_vec mul for each vec
     #combine all the vec
-    B_vecs = [Vec(B.D[0], {i:getitem(B,(i,j)) for i in B.D[0] for j in B.D[1] if j == k}) for k in B.D[1]]
-    R = A.D[0]
-    C = B.D[1]
-    new_mat = Mat((R,C),{(r,c):0 for r in R for c in C})
-    C = list(B.D[1])
-    columns = [matrix_vector_mul(A,v) for v in B_vecs]
-    column = ''
-    for i in range(len(C)):
-        column = columns[i]
-        for (R,val) in column.f.items():
-            setitem(new_mat,(R,C[i]),val)
-    return new_mat
+
+
+    AB = Mat((A.D[0],B.D[1]), {})
+    for r in A.D[0]:
+        for c in B.D[1]:
+            for k in A.D[1]:
+                AB[r,c] =  AB[r,c] + A[r,k] * B[k,c]
+    return AB
 
 
 ################################################################################

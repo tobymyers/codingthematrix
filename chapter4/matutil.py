@@ -1,5 +1,6 @@
 # Copyright 2013 Philip N. Klein
 from vec import Vec
+from mat import Mat
 
 def efficient_rowdict2mat(rowdict):
     col_labels = value(rowdict).D
