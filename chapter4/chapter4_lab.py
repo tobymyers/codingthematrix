@@ -105,7 +105,40 @@ a = mat2bits(P)
 #print(bits2str(a))
 
 #4.14.10
-s = "I'm trying to free your mind, Neo.  But I can only show you the door.  You're the one that has to walk through it."
+s ="""’Twas brillig, and the slithy toves
+      Did gyre and gimble in the wabe:
+All mimsy were the borogoves,
+      And the mome raths outgrabe.
+
+“Beware the Jabberwock, my son!
+      The jaws that bite, the claws that catch!
+Beware the Jubjub bird, and shun
+      The frumious Bandersnatch!”
+
+He took his vorpal sword in hand;
+      Long time the manxome foe he sought—
+So rested he by the Tumtum tree
+      And stood awhile in thought.
+
+And, as in uffish thought he stood,
+      The Jabberwock, with eyes of flame,
+Came whiffling through the tulgey wood,
+      And burbled as it came!
+
+One, two! One, two! And through and through
+      The vorpal blade went snicker-snack!
+He left it dead, and with its head
+      He went galumphing back.
+
+“And hast thou slain the Jabberwock?
+      Come to my arms, my beamish boy!
+O frabjous day! Callooh! Callay!”
+      He chortled in his joy.
+
+’Twas brillig, and the slithy toves
+      Did gyre and gimble in the wabe:
+All mimsy were the borogoves,
+      And the mome raths outgrabe. """
 P = bits2mat(str2bits(s))
 C = G * P
 #print(A)
@@ -119,20 +152,11 @@ CTILDE = C + noise(C, 0.02)
 
 #4.14.13
 corrupt = R * CTILDE
-print(corrupt)
 
 #4.14.14
 def correct(L):
-    print(H)
-    print(H*L,'H*A')
-    print(find_error_matrix(H*L)+L==L, "H*A")
     return find_error_matrix(H*L)+L
 
-#     print(H*A)
-#     errors = find_error_matrix(H*A)
-#     correct = errors + correct
-#     answer = bits2str(mat2bits(correct))
-#     print(answer)
 words = correct(CTILDE)
 print(bits2str(mat2bits(corrupt)),'corrupt')
-print(bits2str(mat2bits(R*words)), "Hamming-ed")
+print(bits2str(mat2bits(R*words)), 'Hamming-ed')

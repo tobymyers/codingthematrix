@@ -265,7 +265,7 @@ def matrix_matrix_mul(A, B):
     #combine all the vec
 
 
-    AB = Mat((A.D[0],B.D[1]), {})
+    AB = Mat((A.D[0],B.D[1]), {}) #this implements the dot product version
     for r in A.D[0]:
         for c in B.D[1]:
             for k in A.D[1]:

@@ -89,4 +89,7 @@ Here's how to figure this out:
 2)look at the goal input and outputs, and look at the rows, how do they operate on the rows?
 3)I wanted the pareity rows to basically not exist, so I put them all to zero, and ended ip with an identity matrix masquerading as a 4x7 matrix.
 question: the parity bits cover bits 123, 124, and 134.  what about 234?  i guess the idea here is that each number is covered twice?
-however, would it be possible for there to be a siruation where everything where the error wouldn't be caught in either of the two checks?  for example if they were all zero?  open question, to ponder later 
+however, would it be possible for there to be a siruation where everything where the error wouldn't be caught in either of the two checks?  for example if they were all zero?  open question, to ponder later
+
+9/19/18 big victory today.  understood a wikipedia article on math.  these have so far been totally unintelligable.
+basically they use a sneaky u vector in 2d geometry to allow for addition.  by setting u to the translation value you want, you can get addition regardless of what the input value is, b/c when you do the matris multiplication that value is summed with the rest.  seeing this made me very angry but it is a clever trick for sure.
