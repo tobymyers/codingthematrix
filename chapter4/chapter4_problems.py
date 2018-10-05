@@ -1,4 +1,7 @@
 from vec import *
+from vecutil import list2vec
+from mat import *
+from matutil import *
 #quiz 0.3.0
 L = [[-1] * 3 for i in range(2)]
 A = [[-1 for j in range(3)] for i in range(2)]
@@ -18,18 +21,11 @@ Vec({'a', 'b'}, {'a':1, 'b':19})
 Vec({'a', 'b'}, {'a':2, 'b':29})"""
 
 
-class Mat:
-    def __init__(self, labels, function):
-        self.D = labels
-        self.f = function
-    def print(self):
-        return self.D, self.f
 #3.0.6
 M = Mat(({'a','b','c'}, {'a', 'b', 'c'}), {('a','a'):0, ('b','b'):0, ('c','c'):0})
 
 #3.0.7
 def identity(labels): return Mat(({labels}, {labels}), {(l0, l1):0 for l0 in labels for l1 in labels if l0 == l1}).print()
-print(identity(('a','b','c')))
 
 #3.0.8 mat1rowdict(M)
 #FOUND AN ERROR IN THE BOOK! didn't specify A.f[r,c], just said A[r,c]
@@ -112,4 +108,118 @@ def diag(D, entries):
     return Mat((D,D), {(d,d):entries[d] for d in D}).print()
 D = ['a','b','c']
 entries = {'a':1,'b':2, 'c':3}
-print(diag(D, entries))
+
+#4.17.13
+def lin_comb_mat_vec_mult(M,v):
+    """multiplies a matrix by a vector using only v[k] and the linear combination definition"""
+    assert M.D[1] == v.D #make sure columns of matrix == d of vector
+    out_vec = Vec(M.D[0],{}) #make a blank vector with the rows of the Vector
+    col_dict = mat2coldict(M) #turn the matrix into a dict format 0: vec, 1, vec
+    #now grab a value from the in-vec and a vec from the matrix
+    #multiply the vec value by every value in the matrix and update the value of the matrix with the new value
+    #after doing this for each value in the matrix, go through and add each matrix vec value with matching domain
+    #spit out result of this
+    for (vec_label,mat_col) in zip(v.D,col_dict.values()):
+        for col_label in mat_col.D:
+            mat_col[col_label] = v[vec_label] * mat_col[col_label]
+    row_dict = mat2rowdict(coldict2mat(col_dict))
+    for (vec_label, row) in zip(out_vec.D,row_dict.values()):
+            out_vec[vec_label] = sum([row.f[val] for val in row.D])
+
+    return out_vec
+M = listlist2mat([[2,4],[6,8]])
+v = Vec({0,1},{0:2,1:2})
+
+#print(lin_comb_mat_vec_mult(M,v))
+
+#4.17.4 procedure to do vector matrix multiplication with only getitem
+#should be basically reverse of 4.17.3
+def lin_comb_vec_mat_mult(v,M):
+    assert M.D[0] == v.D #make sure columns of matrix == d of vector
+    out_vec = Vec(M.D[1],{}) #make a blank vector with the rows of the Vector
+    col_dict = mat2rowdict(M) #turn the matrix into a dict format 0: vec, 1, vec
+    #now grab a value from the in-vec and a vec from the matrix
+    #multiply the vec value by every value in the matrix and update the value of the matrix with the new value
+    #after doing this for each value in the matrix, go through and add each matrix vec value with matching domain
+    #spit out result of this
+    for (vec_label,mat_col) in zip(v.D,col_dict.values()):
+        for col_label in mat_col.D:
+            mat_col[col_label] = v[vec_label] * mat_col[col_label]
+    row_dict = mat2coldict(rowdict2mat(col_dict))
+    for (vec_label, row) in zip(out_vec.D,row_dict.values()):
+            out_vec[vec_label] = sum([row.f[val] for val in row.D])
+    return out_vec
+
+def lin_comb_vec_mat_mult2(v,M):
+    M = M.transpose()
+    return lin_comb_mat_vec_mult(M,v)
+
+print(lin_comb_vec_mat_mult(v,M))
+print(lin_comb_vec_mat_mult2(v,M))
+
+#4.17.15 dot product mat_vec_mult using only dot product
+def dot_product_mat_vec_mult(M,v):
+    assert M.D[1] == v.D
+    row_vecs = mat2rowdict(M)
+    out_vec = Vec(M.D[0],{})
+    for (row,d) in zip(row_vecs.values(),v.D):
+        out_vec[d] = v * row
+    return out_vec
+print(dot_product_mat_vec_mult(M,v),'mat_vec')
+
+#4.17.16 dot product vec_mat_mult using only dot product
+def dot_product_vec_mat_mult(v,M):
+    assert M.D[0] == v.D
+    col_vecs = mat2coldict(M)
+    out_vec = Vec(M.D[1],{})
+    for (col,d) in zip(col_vecs.values(),v.D):
+        out_vec[d] = v * col
+    return out_vec
+print(dot_product_vec_mat_mult(v,M),'dot vec_mat')
+
+#4.17.17 raw mat_vec mul using just the * operator
+def Mv_mat_mat_mul(A,B):
+    #is it cheating if it says I can only use the * operator?
+    return A*B
+
+A = listlist2mat([[0,1],[2,3]])
+B = listlist2mat([[3,4],[5,7]])
+print(Mv_mat_mat_mul(A,B))
+
+def vM_mat_mat_mul(A,B):
+    return A*B
+
+#4.17.18 UN voting data
+def create_voting_dict(strlist):
+    dic = {string[0]:string[3:-1] for string in strlist}
+    for key, val in dic.items():
+        ints = [int(str) for str in val]
+        dic[key] = ints
+    return dic
+
+file = open('UN_voting_data.txt')
+mylist =[(line.split(' ')) for line in file]
+
+def data2mat(str_list):
+    voting_dict = create_voting_dict(str_list)
+    #convert to a dict form 'country': Vec(0,1...n, {votes})
+    country_vecs = {country:list2vec(votes) for (country,votes) in voting_dict.items()}
+    return coldict2mat(country_vecs)
+    #use rowdict2mat to convert into matrix
+# a = data2mat(mylist)
+# dot_a = a.transpose() * a
+# dot_a_vecs = mat2coldict(dot_a)
+# print(dot_a)
+#4.17.20
+def dictlist_helper(dlist,k): return[dict[k] for dict in dlist for key,value in dict.items() if key == k ]
+
+dlist = [{'a':'apple','b':'bug'},{'a':2,'b':7},{'a':5,'b':9}]
+k = 'a'
+
+print(dictlist_helper(dlist,k))
+
+m = listlist2mat([[4,1,-3],[2,2,-2]])
+print(m.transpose())
+
+#4.17.23 find an invertible function that can't be represented by a matrix
+#what about f(x) = x^2?  

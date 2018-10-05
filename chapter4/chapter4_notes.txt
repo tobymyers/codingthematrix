@@ -93,3 +93,5 @@ however, would it be possible for there to be a siruation where everything where
 
 9/19/18 big victory today.  understood a wikipedia article on math.  these have so far been totally unintelligable.
 basically they use a sneaky u vector in 2d geometry to allow for addition.  by setting u to the translation value you want, you can get addition regardless of what the input value is, b/c when you do the matris multiplication that value is summed with the rest.  seeing this made me very angry but it is a clever trick for sure.
+
+9/20/18 turns out vm == m.transpose v.  this makes sense and is probably already proven in the book.  

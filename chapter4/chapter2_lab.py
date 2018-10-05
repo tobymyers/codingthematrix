@@ -1,6 +1,6 @@
-file = open('US_senate_voting_data_109.txt')
-mylist =[(line.split(' ')) for line in file]
-print(mylist)
+# file = open('US_senate_voting_data_109.txt')
+# mylist =[(line.split(' ')) for line in file]
+# print(mylist)
 #2.12.1
 def create_voting_dict(strlist):
     dic = {string[0]:string[3:-1] for string in strlist}

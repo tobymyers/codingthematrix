@@ -105,46 +105,13 @@ a = mat2bits(P)
 #print(bits2str(a))
 
 #4.14.10
-s ="""’Twas brillig, and the slithy toves
-      Did gyre and gimble in the wabe:
-All mimsy were the borogoves,
-      And the mome raths outgrabe.
-
-“Beware the Jabberwock, my son!
-      The jaws that bite, the claws that catch!
-Beware the Jubjub bird, and shun
-      The frumious Bandersnatch!”
-
-He took his vorpal sword in hand;
-      Long time the manxome foe he sought—
-So rested he by the Tumtum tree
-      And stood awhile in thought.
-
-And, as in uffish thought he stood,
-      The Jabberwock, with eyes of flame,
-Came whiffling through the tulgey wood,
-      And burbled as it came!
-
-One, two! One, two! And through and through
-      The vorpal blade went snicker-snack!
-He left it dead, and with its head
-      He went galumphing back.
-
-“And hast thou slain the Jabberwock?
-      Come to my arms, my beamish boy!
-O frabjous day! Callooh! Callay!”
-      He chortled in his joy.
-
-’Twas brillig, and the slithy toves
-      Did gyre and gimble in the wabe:
-All mimsy were the borogoves,
-      And the mome raths outgrabe. """
+s = input('type a sentence or two that you want to transmit')
 P = bits2mat(str2bits(s))
 C = G * P
 #print(A)
 
 #4.14.11
-CTILDE = C + noise(C, 0.02)
+CTILDE = C + noise(C, 0.1)
 #print(bits2str(mat2bits(S)))
 
 #4.14.12
@@ -158,5 +125,11 @@ def correct(L):
     return find_error_matrix(H*L)+L
 
 words = correct(CTILDE)
-print(bits2str(mat2bits(corrupt)),'corrupt')
-print(bits2str(mat2bits(R*words)), 'Hamming-ed')
+print()
+print('when sending messages from phone to phone theres a lot of noise, so bits get flipped')
+print('for example, an A might get switched to a B')
+wee = input('ready to see what this might look like?')
+if True:
+    print(bits2str(mat2bits(corrupt)))
+weaah = input('now lets fix it. hit enter')
+print(bits2str(mat2bits(R*words)))

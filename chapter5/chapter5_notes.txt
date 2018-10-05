@@ -1,0 +1,63 @@
+
+9/28/18
+ok a couple things, it's been almost 6 months since leaving work.  Holy shit that is INSANE.  Curious how much $$ I've spent, and also just generally freaked out by how fast that has happened.  It's so insane.
+
+on the linear algebra front, the Span lemma seems very important.  It's the idea that a given vector v is in the span of a bunch of other vecotrs iff its possible to wtie a linear combination that == 0 (i.e find a linear dependence in these vectors)  of the vectors where the coefficient of vector in question is nonzero.
+this makes sense b/c its basically saying that as long as this vector is included and can be cancelled out, it'll be in the span, just like with colors.
+
+explain the grow algorithm to a friend and analyzing it.  goal is to find the minimum number of edges necessary to connect all the heating lines.  this should be a minimum spanning forest, meaning it can get everywhere but there's no overlap, there's only one way to get to each place, i.e. no cycles, can't go in a circle.
+
+the idea behind the grow algorithm is that it starts with the zero vecotr and keeps adding becots until it's found the minimum spanning forest. the main question becomes, what does it evaluate to know when to stop?
+
+the answer is that it grabs the smallest (cheapest) edge vector from the set and checks to see if that vector is already represented in the span of the other vectors.  for example, if there's already a vector in the generating set that goes from sac to sf, and sf to LA, then the vector sac to LA will be in the span, i.e. it's possible to get from Sac to LA. mathwise you can figure this out by taking alinear combination of the sac--sf vector and sf-la vector.  using the generators shown in the book, both sf vectors will cancel out, leaving the sac-la vector.  this is how you show it's in the span.
+
+linear indpendence and linear dependence are the concepts that underlie what's going on here.  linear dependence means you can create a legit linear combination and get the zero vector.  in this example, that would mean cancelling out all the ones.  this is basically saying that every node is represented twice, or that there'spotential for a cycle.  if adding a node to a node cancels it out, and every node is represented at least twice, then it makes sense that all the nodes would cancel, you get the zero vector, and you know you've got extra paths. So, what we're doing here is testing span conditions.  do the existing vectors get us from point a to pooint b?  do they "span" that set of nodes?  if yes, and we're looking for the smallest number, then we're good.
+
+in the context of the Shrink algorithm, all these same rules apply.  ill give a quick recap but in the opposite order.
+start with all the vectors
+grab the most expensive vector and subract it from the span
+compute the span of the remaining vectors, and see if you can still get to the nodes of the vector you removed some other way
+this means checking to see if the vector you removed is still in the span of the remaining vectors
+if yes, you're good!  you can still get everywhere.
+if not, leave that vector in, and move on to the next vector, repeating the same process.
+
+
+HOLY SHIT BASIS, supposedly the most important concept in linear algebra!  this feels like a big moment.  the basis is what we just found with the grow and shrink algorithms.  a basis is basiscally "get it" a set of generators that allow you to span all the points you want to span but are all linearly independent. property 1) your generators have to span the whole vector space.  property 2)your generators must all be linearly indpendent.
+
+my immediate thoughts here:  holy shit this has a lot to do with efficiency.  You're basically looking for the smallest number of things that will allow you to get the full span.  no dupes, no cycles, no doubles.  it's so optimized it's insane.  what fundamental uestions does it touch on?  idk.  what properties is it going to have?
+1) if the vectors in the span are all linearly dependent there will be a way to "control" each variable.  i.e. you'll have multiple non-zero values in the x place, etc.  a linearly indpendent set will have at least one variable that can't be controlled by
+any others  without messing the other ones up.  for example, for r3 [111][011[110] is a basis.  [010][100][001] is also a vector space.
+
+there can be multiple bases of various simplicity.  i'd imagine that we will get to the point of asking which one is better, maybe.  A spanning forest is exactly a basis.
+
+10/2/18 looking at some funky basis stuff.  turns out each representation maps to exactly one vector, meaning basis ---> vector is one-to-one and onto
+vector spaces can and usually do have multiple bases, and sometimes it's important to go from one to the other.
+you can do this by turning a basis into a matrix and then taking it's inverse, and multiplying that by another basis.  essentially you're going from representation, through a basis, to a vector, and then back through another inverse basis to another representation.
+this is my understanding right now clearly missing a couple pieces but that's the general road map.
+
+recall of what I just learned about camera coordinates/basis.
+you've got three axes, one goes from origin (camera center) to the (0,0) top left of the image sensor, this is a3
+a2 goes from the top left corner straight down, it's the y axis,
+last goes horiontally from the right, this is essentially the x.
+this is set up on purpose to scale images.  it turns out that the location of a photon travelling from the object towards the
+sensor can be found by dividing the x and y by the z.  Need to spend more time looking at the math on this one to figure out why but that's the gist.
+
+10/2/18 k checked out the solver module and all it has in it are some crazy hash keys and I literally have no idea how it works.
+like it doesn't even look like code.  ask Zack?
+
+k so I now understand the difficulty of solving a linear equation, and the point of what we're going to do
+in chapter 13.  Idk how the fuck we are going to get there but I'm stoked to see how it goes.
+one situation where we can solve a system of linear equations is if we're dealing with an invertible matrix.
+that's a bit of why they are so important.  but, if I'm trying to go from a 5 vector back to a 3 vector or something, I need to use that insane solver module that makes
+absolutely zero sense.  point is, it's way easier to go forward than backward, to undo than to do in this context.  you're performing so many operations how do you reverse that.
+
+K so I've got a much better understanding now of the superfluous vector lemma.  The point of it is to be able to show whether a given vector is linearly dependent, i.e., can you form it by making a linear combination of the other vectors
+i.e. is it in the Span of the set to which it belongs.  the answer will be yes if there is a vector such that
+(a matrix of the vectors in the set)-(the vector we're testing)  * some mystery vector == the vector we're testing.  In the spanning forest example, is there another path?  If so, you don't need the vector in question.
+the ability to solve a linear system would be realllly nice to be able to do all this stuff, and that's what we're doing at the end of the book.
+Also a set that contains just one vector will of course be linearly independent.  it's span will always be scaled versions of itself. if you took it away, you wouldn't be able to form anything other than the 0 vector
+
+10/5/18
+pretty solid debugging effort here.  saw an error that wasn't obvious, found the solution by making one small change, and
+everything else suddenly worked.  What's crazier is that I had the intuition that what I was coding wasn't a good idea when I originally put the line in there.
+Making progress slowly but surely!

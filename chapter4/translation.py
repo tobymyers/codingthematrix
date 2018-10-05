@@ -24,7 +24,7 @@ def translate(alpha, beta): return Mat(({'x','y','u'}, {'x','y','u'}),{('x','x')
 
 #location_m = translation(300,300) * location_m
 print(translate(100,-200))
-#mat2display(translation(3,2)*location_m, color_m)
+#mat2display(translate(3,2)*location_m, color_m)
 
 #task 4
 """a procedure to scale an image"""
@@ -85,12 +85,14 @@ def reflect_about(x1,y1,x2,y2):
     top_x,top_y = location_m.f[('x',(0,0))], location_m.f[('y',(0,0))]
     trans_m = translate(line_avg_x-top_x, line_avg_y-top_y) * location_m
     spun_trans_m = rotation(rad_theta) * trans_m
+    mat2display(spun_trans_m, color_m)
+
     reflect_spun_trans_m = reflect_x() * spun_trans_m
     unspun_trans_m = rotation(-rad_theta) * reflect_spun_trans_m
     untrans_m = translate(line_avg_x - top_x , line_avg_y-top_y) * unspun_trans_m
     mat2display(untrans_m, color_m)
 
 #location_m = rotation(pi/4) * location_m
-location_m = translate(10,10) * location_m
-reflect_about(100,100,105,105)
+location_m = translate(200,200) * location_m
+reflect_about(1,1,9,9)
 reflect_about(20,21,21,20)
