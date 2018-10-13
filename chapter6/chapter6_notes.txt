@@ -1,0 +1,23 @@
+steps of simple authentication scheme revisited
+# if the number of vectors in a set is greater than the cardinality of any given vector, i.e. if there are M n vectors and
+M > n, then the span of the set is likely to be the whole field.  This is an intuitive fact.  The cardinality of the basis can't be
+more than the cardinality of the domain of the vectors, so if you've got vectors over r3, and you've got say 10 of them, it's pretty likely
+you have a basis in there, meaning the Span is all of r3.
+
+In the context of the simple authentication scheme, this is important because it means that once Eve has a number of vectors and responses > the cardinality of the challenge veetor,
+eve is likely to be able to compute the answer in all cases, because the span of the vectors is likely to be all of GF2.
+
+Eve's check algorithm for challenge vector i (cvi):
+#1 collect challenge vector and response.
+#2 check to see if challenge vector is in set of already collected challenge vectors.
+#If yes, use corresponding response
+#Else:
+#see if challenge vector is in Span of previously collected challenge vectors by making a matrix out of challenge vectors - cvi and solving for cvi
+#if solution found, compute linear combination of corresponding responses to find answer.
+
+A crucial fact here is that the solution set to Ax = b == is x + Null A.  This means that if A is linearly indpendent, then x must be a valid solution, so
+Eve can use solver.
+AMENDMENT:  to make sure she doesn't get an incorrect answer from solver, Eve should try to find a basis for Span(A) out of the given a vectors.
+
+dimension == size of a basis for a vector space. i.e. 2 for R2 [0,1][1,0]
+rank == dimension.  I see no fundamental difference.  dimension starts from a Vector Space, rank from a span.  which tends to be a vector space
