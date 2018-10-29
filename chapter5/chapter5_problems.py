@@ -42,7 +42,8 @@ print(outvec)
 #5.14.14
 def vec2rep(vec, veclist):
     """a procedure that maps a vector to it's coordinate representation given a basis/set of generators
-    must use solver to find the inverse matrix"""
+    must use solver to find the matrix that undoes the work of the matrix that originally converted from
+    coordinates to vectors"""
     gens = coldict2mat(veclist)
     return solve(gens, vec)
 
@@ -155,10 +156,31 @@ L1 = [list2vec(l) for l in [[1,1,1],[0,1,1],[0,0,1]]]
 T2 = [list2vec(l) for l in [[0,5,3],[0,2,2]]]
 L2 = [list2vec(l) for l in [[1,1,1],[0,1,1],[0,0,1]]]
 
-[print(vec) for vec in superset_basis(a0,x3]
+#[print(vec) for vec in superset_basis(a0,x3)]
 
 #task 5.14.19
 def exchange(S,A,z):
     """a procedure that adds a vector to a vector space and kicks out another without changing the span of the vector space.
     to do this, we set aside a linearly independent set of vecs A that is a subset of S, and make sure that we're grabbing a
-    linearly independent vec z such that z + A is linearly independent.
+    linearly independent vec z such that z + A is linearly independent.  We need to make sure that we can form w with z U A, so we will
+    test z U A to try and solve for w, which must be a vector not in A but in S,and if we can, return w as a valid vector to be exchanged."""
+    #assert is_independent(A + [z]) == True #make sure A + z really is independent
+    #assert False not in [a in S for a in A] #make sure A is subset of S
+    for w in S:
+        if w not in A:
+            Scopy = (S+z).copy() #im copying an array many times.  Is there a more efficient way?
+            Scopy.remove(w)
+            Scopy_mat = coldict2mat(Scopy)
+            result = solve(Scopy_mat, w)
+
+            #tests to make sure result valid
+            residual = w - Scopy_mat * result
+            residual_test = residual * residual
+            if residual_test <= 10**-14:
+                return w
+
+S = [list2vec(l) for l in [[0,0,5,3],[2,0,1,3],[0,0,1,0],[1,2,3,4]]]
+A = [list2vec(l) for l in [[0,0,5,3],[2,0,1,3]]]
+z = [list2vec([0,2,1,1])]
+
+print(exchange(S,A,z))
